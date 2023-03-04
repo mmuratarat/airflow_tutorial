@@ -1,0 +1,22 @@
+python3 -m airflow users create --username mmuratarat --password Quake7446632 --firstname Murat --lastname Arat --role Admin --email arat.murat@gmail.com
+
+
+python3 -m airflow webserver -D will start airflow webserver
+python3 -m airflow scheduler -D will start airflow scheduler
+
+ps aux | grep airflow 
+
+
+cat ~/airflow/airflow-scheduler.pid will return PID of Airflow Scheduler
+cat ~/airflow/airflow-webserver.pid will return PID of Airflow Webserver
+
+ Airflow creates files with process IDs of the scheduler and gunicorn server in its home directory (by default ~/airflow/). Running
+
+kill $(cat ~/airflow/airflow-scheduler.pid)
+
+Will terminate the scheduler.
+
+
+Unfortunately, airflow-webserver.pid contains the PID of the gunicorn server and not the initial Airflow command that started it (which is the parent of the gunicorn process). So, we will first have to find the parent PID of the gunicorn process and then kill the parent process.
+
+kill -9 $(ps -o ppid= -p $(cat ~/airflow/airflow-webserver.pid))
