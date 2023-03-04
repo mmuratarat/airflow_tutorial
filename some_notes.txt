@@ -1,6 +1,6 @@
-The first time you run Airflow, it will create a file called airflow.cfg in your $AIRFLOW_HOME directory (~/airflow by default). This file contains Airflow’s configuration and you can edit it to change any of the settings. You can find this file and search for web_server_port. Then change it to any unused port, e.g. 8081. You can then run airflow webserver as usual, http://localhost:8081/
-
-
+The first time you run Airflow, it will create a file called airflow.cfg in your $AIRFLOW_HOME directory (~/airflow by default). 
+This file contains Airflow’s configuration and you can edit it to change any of the settings. You can find this file and search for web_server_port. Then change it to any unused port, e.g. 8081. This will change the port from 8080 to something like 8081.
+You can then run airflow webserver as usual, http://localhost:8081/
 
 python3 -m airflow webserver -D will start the webserver.
 python3 -m airflow scheduler -D will start the scheduler.
