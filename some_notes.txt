@@ -23,13 +23,8 @@ airflow db init
 python3 -m airflow users create --username mmuratarat --firstname Murat --lastname Arat --role Admin --email arat.murat@gmail.com
 
 --------------------------------------------------------------------------------------------------------------------------------------
-
 python3 -m airflow webserver --port 8081 will start the server on host 8081 attached to terminal. 
-python3 -m airflow scheduler --port 8081 will start the server on host 8081 attached to terminal. 
-
-python3 -m airflow webserver -D will start the webserver detached.
 python3 -m airflow scheduler -D will start the scheduler detached.
-
 -------------------------------------------------------------------------------------------------------------------------------------
 
 ps aux | grep airflow will show all airflow processes.
