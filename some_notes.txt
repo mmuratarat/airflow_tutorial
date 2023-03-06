@@ -48,7 +48,7 @@ kill $(cat ~/airflow/airflow-webserver-monitor.pid)
 
 ## Some Commands
 
-"python3 - m airflow db check" will check the status of your database (eg. connected, not connected, etc).
+"python3 -m airflow db check" will check the status of your database (eg. connected, not connected, etc).
 
 " python3 -m airflow users list" will list down all users and their roles.
 
