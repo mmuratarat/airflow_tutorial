@@ -8,9 +8,6 @@ python3 -m airflow scheduler -D will start the scheduler.
 python3 -m airflow users create --username mmuratarat --password Quake7446632 --firstname Murat --lastname Arat --role Admin --email arat.murat@gmail.com
 will create database user foer Airflow
 
-python3 -m airflow webserver -D will start airflow webserver
-python3 -m airflow scheduler -D will start airflow scheduler
-
 ps aux | grep airflow will show all airflow processes.
 
 cat ~/airflow/airflow-scheduler.pid will return PID of Airflow Scheduler
