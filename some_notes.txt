@@ -1,3 +1,17 @@
+
+
+You need to create a database and a database user that Airflow will use to access this database. In the example below, a database "airflow_db" and user with username "airflow_user" with password "airflow_pass" will be created
+
+CREATE DATABASE airflow_db;
+CREATE USER airflow_user WITH PASSWORD 'airflow_pass';
+GRANT ALL PRIVILEGES ON DATABASE airflow_db TO airflow_user;
+
+Then, on Terminal, initialize the database and create the user:
+
+airflow db init
+python3 -m airflow users create --username mmuratarat --firstname Murat --lastname Arat --role Admin --email arat.murat@gmail.com
+
+
 The first time you run Airflow, it will create a file called airflow.cfg in your $AIRFLOW_HOME directory (~/airflow by default). 
 This file contains Airflow’s configuration and you can edit it to change any of the settings. You can find this file and search for web_server_port. Then change it to any unused port, e.g. 8081. This will change the port from 8080 to something like 8081.
 You can then run airflow webserver as usual, http://localhost:8081/
@@ -23,3 +37,18 @@ Will terminate the scheduler.
 Unfortunately, airflow-webserver.pid contains the PID of the gunicorn server and not the initial Airflow command that started it (which is the parent of the gunicorn process). So, we will first have to find the parent PID of the gunicorn process and then kill the parent process.
 
 kill -9 $(ps -o ppid= -p $(cat ~/airflow/airflow-webserver.pid))
+
+
+## Some Commands
+
+"python3 - m airflow db check" will check the status of your database (eg. connected, not connected, etc).
+
+" python3 -m airflow users list" will list down all users and their roles.
+
+"python3 -m airflow tasks list <DAG_ID>" will list down all tasks related to a given DAG.
+
+"python3 -m airflow dags list" will list our a list of DAGs that you currently have running.
+
+"python3 -m airflow dags delete <DAG_ID>" will delete all the data in DB related to the task.
+
+"python3 -m airflow dags show <DAG_ID>" will show the structure and dependencies of a DAG.
