@@ -18,11 +18,10 @@ sql_alchemy_conn = postgresql+psycopg2://<user>:<password>@<host>/<db>
 
 The default executor is SequentialExecutor. In LocalExecutor, task instances get executed as subprocesses. https://airflow.apache.org/docs/apache-airflow/stable/howto/set-up-database.html#setting-up-a-postgresql-database
 
-
 Then, on Terminal, initialize the database and create the user:
 
-airflow db init
-python3 -m airflow users create --username mmuratarat --firstname Murat --lastname Arat --role Admin --email arat.murat@gmail.com
+python3.10 -m airflow db init
+python3.10 -m airflow users create --username mmuratarat --firstname Murat --lastname Arat --role Admin --email arat.murat@gmail.com
 
 --------------------------------------------------------------------------------------------------------------------------------------
 python3 -m airflow webserver --port 8081 will start the server on host 8081 attached to terminal. 
@@ -50,14 +49,18 @@ kill $(cat ~/airflow/airflow-webserver-monitor.pid)
 
 ## Some Commands
 
-"python3 -m airflow db check" will check the status of your database (eg. connected, not connected, etc).
+"python3.10 -m airflow db check" will check the status of your database (eg. connected, not connected, etc).
 
-" python3 -m airflow users list" will list down all users and their roles.
+"python3.10 -m airflow users list" will list down all users and their roles.
 
-"python3 -m airflow tasks list <DAG_ID>" will list down all tasks related to a given DAG.
+"python3.10 -m airflow tasks list <DAG_ID>" will list down all tasks related to a given DAG.
 
-"python3 -m airflow dags list" will list our a list of DAGs that you currently have running.
+"python3.10 -m airflow dags list" will list our a list of DAGs that you currently have running.
 
-"python3 -m airflow dags delete <DAG_ID>" will delete all the data in DB related to the task.
+"python3.10 -m airflow dags delete <DAG_ID>" will delete all the data in DB related to the task.
 
-"python3 -m airflow dags show <DAG_ID>" will show the structure and dependencies of a DAG.
+"python3.10 -m airflow dags show <DAG_ID>" will show the structure and dependencies of a DAG.
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+If you get "Postgres + Airflow db: permission denied for schema public" error, "ALTER DATABASE airflow_db OWNER TO airflow_user;" sets the owner of the database from the standard/admin user (e.g. postgres) to airflow_user. Now, run "python3.10 -m airflow db init" again, and the error doesn't come up, instead I get Initialization done.
