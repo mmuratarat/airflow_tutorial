@@ -68,4 +68,6 @@ If you get "Postgres + Airflow db: permission denied for schema public" error, "
 
 -------------------------------------------------------------------------------------------------------------------------------------
 
+Correct path to your DAG folder is set in airflow.cfg file (it's located at "~/airflow.cfg")
+
 For DAGBag approach, https://xnuinside.medium.com/how-to-load-use-several-dag-folders-airflow-dagbags-b93e4ef4663c
