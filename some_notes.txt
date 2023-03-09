@@ -64,3 +64,8 @@ kill $(cat ~/airflow/airflow-webserver-monitor.pid)
 -------------------------------------------------------------------------------------------------------------------------------------
 
 If you get "Postgres + Airflow db: permission denied for schema public" error, "ALTER DATABASE airflow_db OWNER TO airflow_user;" sets the owner of the database from the standard/admin user (e.g. postgres) to airflow_user. Now, run "python3.10 -m airflow db init" again, and the error doesn't come up, instead I get Initialization done.
+
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+For DAGBag approach, https://xnuinside.medium.com/how-to-load-use-several-dag-folders-airflow-dagbags-b93e4ef4663c
