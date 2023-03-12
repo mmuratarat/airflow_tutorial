@@ -63,11 +63,21 @@ kill $(cat ~/airflow/airflow-webserver-monitor.pid)
 
 -------------------------------------------------------------------------------------------------------------------------------------
 
-If you get "Postgres + Airflow db: permission denied for schema public" error, "ALTER DATABASE airflow_db OWNER TO airflow_user;" sets the owner of the database from the standard/admin user (e.g. postgres) to airflow_user. Now, run "python3.10 -m airflow db init" again, and the error doesn't come up, instead I get Initialization done.
-
+If you get "Postgres + Airflow db: permission denied for schema public" error, "ALTER DATABASE airflow_db OWNER TO airflow_user;" sets the owner of the database from the standard/admin user (e.g. postgres) to airflow_user. Now, run "python3.10 -m airflow db init" again, and the error doesn't come up, instead, you get "Initialization done".
 
 -------------------------------------------------------------------------------------------------------------------------------------
 
 Correct path to your DAG folder is set in airflow.cfg file (it's located at "~/airflow.cfg")
 
 For DAGBag approach, https://xnuinside.medium.com/how-to-load-use-several-dag-folders-airflow-dagbags-b93e4ef4663c
+
+-------------------------------------------------------------------------------------------------------------------------------------
+Traditionally, operator relationships are set with the set_upstream() and set_downstream() methods. In Airflow 1.8, this can be done with the Python bitshift operators >> and <<. The following four statements are all functionally equivalent:
+
+op1 >> op2
+op1.set_downstream(op2)
+
+op2 << op1
+op2.set_upstream(op1)
+
+
