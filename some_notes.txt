@@ -123,3 +123,15 @@ Kubernetes Executor: The Kubernetes Executor uses the Kubernetes API for resourc
 CeleryKubernetes Executor: It permits users to run Celery Executor and a Kubernetes Executor simultaneously.
 
 Dask Executor: Dask is a parallel computing library in python whose architecture revolves around a sophisticated distributed task scheduler. Dask Executor allows you to run Airflow tasks in a Dask Distributed cluster. It acts as an alternative to the Celery Executor for horizontal scaling, which you implement with good understanding. 
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+If you using airflow with Docker, You can enter the worker container so that you can run airflow commands 
+
+docker exec -it <container-id> bash
+
+You can find <container-id> for the Airflow worker service by running "docker ps".
+
+After you are in bash shell of the container, you can list all the dags with the command:
+
+airflow dags list
