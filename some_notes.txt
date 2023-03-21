@@ -135,3 +135,87 @@ You can find <container-id> for the Airflow worker service by running "docker ps
 After you are in bash shell of the container, you can list all the dags with the command:
 
 airflow dags list
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+OPERATORS IN AIRFLOW
+
+Airflow provides operators for many common tasks, including:
+
+- BashOperator - executes a bash command
+- PythonOperator - calls an arbitrary Python function
+- EmailOperator - sends an email
+- SimpleHttpOperator - sends an HTTP request
+- MySqlOperator, SqliteOperator, PostgresOperator, MsSqlOperator, OracleOperator, JdbcOperator, etc. - executes a SQL command
+- Sensor - waits for a certain time, file, database row, S3 key, etc…
+
+In addition to these basic building blocks, there are many more specific operators: DockerOperator, HiveOperator, S3FileTransformOperator(, PrestoToMySqlTransfer, SlackAPIOperator… you get the idea!
+
+Operators are only loaded by Airflow if they are assigned to a DAG.
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+XCOMS
+
+XComs let tasks exchange messages, allowing more nuanced forms of control and shared state. The name is an abbreviation of “cross-communication”. XComs are principally defined by a key, value, and timestamp.
+
+XComs can be “pushed” (sent) or “pulled” (received). 
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+AIRFLOW TRIGGER RULES
+
+By default, your tasks get executed once all the parent tasks succeed. this behaviour is what you expect in general. But what if you want something more complex? What if you would like to execute a task as soon as one of its parents succeeds? Or maybe you would like to execute a different set of tasks if a task fails? Or act differently according to if a task succeeds, fails or event gets skipped? 
+
+
+
+
+all_success
+This one is pretty straightforward, and you’ve already seen it, your task gets triggered when all upstream tasks (parents) have succeeded.
+
+One caveat though, if one of the parents gets skipped, then the task gets skipped as well
+
+
+
+
+all_failed
+Pretty clear, your task gets triggered if all of its parent tasks have failed.
+
+Like with all_success, if one of the parents gets skipped, then the task gets skipped as well
+
+
+
+
+one_failed
+As soon as one of the upstream tasks fails, your task gets triggered.
+
+Can be useful if you have some long running tasks and want to do something as soon as one fails.
+
+
+
+
+one_success
+Like with one_failed, but the opposite. As soon as one of the upstream tasks succeeds, your task gets triggered.
+
+
+
+
+none_failed
+Your task gets triggered if all upstream tasks have succeeded or been skipped.
+
+Only useful if you want to handle the skipped status.
+
+
+
+
+none_failed_min_one_success
+Before known as “none_failed_or_skipped” (before Airflow 2.2), with this trigger rule, your task gets triggered if all upstream tasks haven’t failed and at least one has succeeded.
+
+
+
+
+none_skipped
+With this simple trigger rule, your task gets triggered if no upstream tasks are skipped. If they are all in success or failed.
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
